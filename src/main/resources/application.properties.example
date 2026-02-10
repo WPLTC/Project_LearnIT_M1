@@ -1,7 +1,7 @@
 # Connexion a PostgreSQL
 spring.datasource.url=jdbc:postgresql://localhost:5432/gestion_etablissement
-spring.datasource.username=postgres
-spring.datasource.password=xaxciq-8xowfa-nohhaC
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 
 # Server
 server.port=8081
