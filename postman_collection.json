@@ -40,6 +40,20 @@
       ]
     },
     {
+      "name": "Auth - Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"newuser\",\n  \"password\": \"password\",\n  \"email\": \"new@example.com\",\n  \"nom\": \"Nom\",\n  \"prenom\": \"Prenom\",\n  \"role\": \"ETUDIANT\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/auth/register", "host": ["{{baseUrl}}"], "path": ["api","auth","register"] }
+      }
+    },
+    {
       "name": "Auth - Me",
       "request": {
         "method": "GET",
@@ -73,6 +87,61 @@
           { "key": "Content-Type", "value": "application/json" },
           { "key": "Authorization", "value": "Bearer {{token}}" }
         ],
+        {
+          "name": "Presence - Marquer",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emploiDuTempsId\": 1,\n  \"userId\": 3,\n  \"present\": true\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/presences/marquer", "host": ["{{baseUrl}}"], "path": ["api","presences","marquer"] }
+          }
+        },
+        {
+          "name": "Modules - Get All",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/modules", "host": ["{{baseUrl}}"], "path": ["api","modules"] }
+          }
+        },
+        {
+          "name": "Etudiants - Get All",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/etudiants", "host": ["{{baseUrl}}"], "path": ["api","etudiants"] }
+          }
+        },
+        {
+          "name": "Enseignants - Get All",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/enseignants", "host": ["{{baseUrl}}"], "path": ["api","enseignants"] }
+          }
+        },
+        {
+          "name": "Classes - Get All",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/classes", "host": ["{{baseUrl}}"], "path": ["api","classes"] }
+          }
+        },
+        {
+          "name": "Evaluations - Get All",
+          "request": {
+            "method": "GET",
+            "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+            "url": { "raw": "{{baseUrl}}/api/evaluations", "host": ["{{baseUrl}}"], "path": ["api","evaluations"] }
+          }
+        }
         "body": {
           "mode": "raw",
           "raw": "{\n  \"userId\": 3,\n  \"salleId\": 2,\n  \"dateDebut\": \"2026-03-05T10:00:00\",\n  \"dateFin\": \"2026-03-05T12:00:00\",\n  \"motif\": \"Réunion projet\",\n  \"statut\": \"EN_ATTENTE\"\n}"
