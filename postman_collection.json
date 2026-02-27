@@ -45,6 +45,24 @@
       }
     },
     {
+      "name": "Auth - Register Student",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"username\": \"student1\",\n  \"password\": \"studentpass\",\n  \"email\": \"student1@example.com\",\n  \"nom\": \"Dupont\",\n  \"prenom\": \"Jean\",\n  \"matricule\": \"MAT2026001\",\n  \"dateNaissance\": \"2000-05-10\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/auth/register-student", "host": ["{{baseUrl}}"], "path": ["api","auth","register-student"] }
+      }
+    },
+    {
+      "name": "Auth - Register Teacher",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"username\": \"teacher1\",\n  \"password\": \"teacherpass\",\n  \"email\": \"teacher1@example.com\",\n  \"nom\": \"Martin\",\n  \"prenom\": \"Claire\",\n  \"specialite\": \"Maths\",\n  \"heuresEnseignees\": 120,\n  \"statut\": \"PERMANENT\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/auth/register-teacher", "host": ["{{baseUrl}}"], "path": ["api","auth","register-teacher"] }
+      }
+    },
+    {
       "name": "Auth - Me",
       "request": {
         "method": "GET",
