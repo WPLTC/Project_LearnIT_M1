@@ -1,0 +1,107 @@
+{
+  "info": {
+    "name": "LearnIT API - Collection",
+    "_postman_id": "learnit-collection",
+    "description": "Collection pour tester l'API (auth, reservations, emplois du temps)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8081" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"adminpass\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api","auth","login"] }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var resp = pm.response.json();",
+              "if(resp.token){",
+              "  pm.environment.set('token', resp.token);",
+              "  console.log('Token saved to environment');",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth - Me",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": { "raw": "{{baseUrl}}/api/auth/me", "host": ["{{baseUrl}}"], "path": ["api","auth","me"] }
+      }
+    },
+    {
+      "name": "Get EmploisDuTemps",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/emplois-du-temps", "host": ["{{baseUrl}}"], "path": ["api","emplois-du-temps"] }
+      }
+    },
+    {
+      "name": "Get Reservations",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/reservations", "host": ["{{baseUrl}}"], "path": ["api","reservations"] }
+      }
+    },
+    {
+      "name": "Create Reservation (exemple)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 3,\n  \"salleId\": 2,\n  \"dateDebut\": \"2026-03-05T10:00:00\",\n  \"dateFin\": \"2026-03-05T12:00:00\",\n  \"motif\": \"Réunion projet\",\n  \"statut\": \"EN_ATTENTE\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/reservations", "host": ["{{baseUrl}}"], "path": ["api","reservations"] }
+      }
+    },
+    {
+      "name": "Get Disponibilites (salle)",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/reservations/disponibilites?salleId=2", "host": ["{{baseUrl}}"], "path": ["api","reservations","disponibilites"], "query": [ { "key": "salleId", "value": "2" } ] }
+      }
+    },
+    {
+      "name": "Planifier cours (exemple)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"moduleId\": 1,\n  \"enseignantId\": 1,\n  \"salleId\": 1,\n  \"dateDebut\": \"2026-03-03T09:00:00\",\n  \"dateFin\": \"2026-03-03T11:00:00\",\n  \"recurrence\": \"NONE\",\n  \"statut\": \"PLANNIFIE\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/emplois-du-temps/planifier", "host": ["{{baseUrl}}"], "path": ["api","emplois-du-temps","planifier"] }
+      }
+    }
+  ]
+}
