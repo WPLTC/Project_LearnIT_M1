@@ -6,6 +6,8 @@ import com.example.demo.repository.EtudiantRepository;
 import com.example.demo.service.EtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,9 @@ public class EtudiantServiceImpl implements EtudiantService {
 
     @Autowired
     private EtudiantRepository etudiantRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<EtudiantDTO> getAll() {
@@ -32,6 +37,10 @@ public class EtudiantServiceImpl implements EtudiantService {
     @Override
     public EtudiantDTO create(EtudiantDTO dto) {
         Etudiant etudiant = toEntity(dto);
+        // link User if provided
+        if (dto.getUserId() != null) {
+            userRepository.findById(dto.getUserId()).ifPresent(etudiant::setUser);
+        }
         return toDTO(etudiantRepository.save(etudiant));
     }
 

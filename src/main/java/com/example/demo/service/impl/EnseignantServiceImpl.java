@@ -6,6 +6,8 @@ import com.example.demo.repository.EnseignantRepository;
 import com.example.demo.service.EnseignantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.entity.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +18,9 @@ public class EnseignantServiceImpl implements EnseignantService {
 
     @Autowired
     private EnseignantRepository enseignantRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public List<EnseignantDTO> getAll() {
@@ -32,6 +37,9 @@ public class EnseignantServiceImpl implements EnseignantService {
     @Override
     public EnseignantDTO create(EnseignantDTO dto) {
         Enseignant enseignant = toEntity(dto);
+        if (dto.getUserId() != null) {
+            userRepository.findById(dto.getUserId()).ifPresent(enseignant::setUser);
+        }
         return toDTO(enseignantRepository.save(enseignant));
     }
 
