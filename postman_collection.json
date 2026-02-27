@@ -123,5 +123,90 @@
       "name": "Evaluations - Get All",
       "request": { "method": "GET", "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ], "url": { "raw": "{{baseUrl}}/api/evaluations", "host": ["{{baseUrl}}"], "path": ["api","evaluations"] } }
     }
+    ,
+    {
+      "name": "Salles - Get All",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/salles", "host": ["{{baseUrl}}"], "path": ["api","salles"] }
+      }
+    },
+    {
+      "name": "Salles - Get By Id",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/salles/1", "host": ["{{baseUrl}}"], "path": ["api","salles","1"] }
+      }
+    },
+    {
+      "name": "Salles - Create",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"nom\": \"Salle 101\",\n  \"capacite\": 30,\n  \"localisation\": \"Bâtiment A - 1er\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/salles", "host": ["{{baseUrl}}"], "path": ["api","salles"] }
+      }
+    },
+    {
+      "name": "Salles - Update",
+      "request": {
+        "method": "PUT",
+        "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"nom\": \"Salle 101 - Modifiée\",\n  \"capacite\": 35\n}" },
+        "url": { "raw": "{{baseUrl}}/api/salles/1", "host": ["{{baseUrl}}"], "path": ["api","salles","1"] }
+      }
+    },
+    {
+      "name": "Salles - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/salles/1", "host": ["{{baseUrl}}"], "path": ["api","salles","1"] }
+      }
+    },
+    {
+      "name": "Notes - Get All",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/notes", "host": ["{{baseUrl}}"], "path": ["api","notes"] }
+      }
+    },
+    {
+      "name": "Notes - Get By Id",
+      "request": {
+        "method": "GET",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/notes/1", "host": ["{{baseUrl}}"], "path": ["api","notes","1"] }
+      }
+    },
+    {
+      "name": "Notes - Create",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"etudiantId\": 3,\n  \"evaluationId\": 1,\n  \"valeur\": 15.5,\n  \"commentaire\": \"Bon travail\",\n  \"saisieParId\": 2\n}" },
+        "url": { "raw": "{{baseUrl}}/api/notes", "host": ["{{baseUrl}}"], "path": ["api","notes"] }
+      }
+    },
+    {
+      "name": "Notes - Update",
+      "request": {
+        "method": "PUT",
+        "header": [ { "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "body": { "mode": "raw", "raw": "{\n  \"valeur\": 16.0,\n  \"commentaire\": \"Correction: 16\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/notes/1", "host": ["{{baseUrl}}"], "path": ["api","notes","1"] }
+      }
+    },
+    {
+      "name": "Notes - Delete",
+      "request": {
+        "method": "DELETE",
+        "header": [ { "key": "Authorization", "value": "Bearer {{token}}" } ],
+        "url": { "raw": "{{baseUrl}}/api/notes/1", "host": ["{{baseUrl}}"], "path": ["api","notes","1"] }
+      }
+    }
   ]
 }
