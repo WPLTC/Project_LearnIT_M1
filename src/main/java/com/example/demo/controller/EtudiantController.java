@@ -31,22 +31,19 @@ public class EtudiantController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@jakarta.validation.Valid @RequestBody EtudiantDTO dto, Authentication authentication) {
-        if (!isAdmin(authentication)) return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        return ResponseEntity.status(HttpStatus.CREATED).body(etudiantService.create(dto));
+    public EtudiantDTO create(@jakarta.validation.Valid @RequestBody EtudiantDTO dto) {
+        return etudiantService.create(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @jakarta.validation.Valid @RequestBody EtudiantDTO dto, Authentication authentication) {
-        if (!isAdmin(authentication)) return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    public ResponseEntity<EtudiantDTO> update(@PathVariable Long id, @jakarta.validation.Valid @RequestBody EtudiantDTO dto) {
         return etudiantService.update(id, dto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id, Authentication authentication) {
-        if (!isAdmin(authentication)) return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (etudiantService.delete(id)) {
             return ResponseEntity.noContent().build();
         } else {
@@ -59,12 +56,5 @@ public class EtudiantController {
         return etudiantService.search(query);
     }
 
-    private boolean isAdmin(Authentication authentication) {
-        if (authentication == null) return false;
-        for (GrantedAuthority a : authentication.getAuthorities()) {
-            String auth = a.getAuthority();
-            if ("ROLE_ADMIN".equals(auth) || "ADMIN".equals(auth)) return true;
-        }
-        return false;
-    }
+    
 }
